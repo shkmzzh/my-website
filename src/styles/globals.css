@@ -1,33 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --header-height: 80px;
+  --min-content-width: 300px;
+  --max-content-width: 960px;
+  scrollbar-width: thin;
+  color-scheme: light
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@media (prefers-reduced-motion:no-preference) {
+  html {
+      scroll-behavior: smooth
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><circle fill="%2364748b" cx="2" cy="2" r=".5"/></svg>');
+  background-repeat: repeat;
+  font-size: .9rem;
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42/var(--tw-text-opacity))
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@media (min-width: 768px) {
+  body {
+      font-size:1rem;
+      letter-spacing: .025em
   }
+}
+
+body {
+  word-spacing: .12rem
 }
