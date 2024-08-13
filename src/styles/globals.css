@@ -3,7 +3,9 @@
   --min-content-width: 300px;
   --max-content-width: 960px;
   scrollbar-width: thin;
-  color-scheme: light
+  color-scheme: light;
+  --color-white: #ffffff;
+  --color-black: #1e293b;
 }
 
 @media (prefers-reduced-motion:no-preference) {
@@ -13,13 +15,9 @@
 }
 
 body {
-  --tw-bg-opacity: 1;
   background-color: rgb(255 255 255/var(--tw-bg-opacity));
   background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><circle fill="%2364748b" cx="2" cy="2" r=".5"/></svg>');
   background-repeat: repeat;
-  font-size: .9rem;
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42/var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {
@@ -32,3 +30,45 @@ body {
 body {
   word-spacing: .12rem
 }
+.max-w-content {
+  max-width: var(--max-content-width);
+}
+.min-w-content {
+  min-width: var(--min-content-width);
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .md\:h-header {
+    height: var(--header-height);
+  }
+}
+
+
+/* header */
+
+.logo{
+  border: 2px solid var(--color-black);
+  box-sizing: border-box;
+  background-color: var(--color-white);
+  font-weight: bold;
+  box-shadow: 0.2rem 0.2rem 0 0 var(--color-black);
+}
+.logo span {
+  margin: 0.12rem;
+}
+
+.logo:hover {
+  box-shadow: 0.2rem 0.2rem 0 0 var(--color-white);
+}
+
+.logo:hover span {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
