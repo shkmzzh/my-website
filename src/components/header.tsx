@@ -1,26 +1,39 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 const navList = [
-  { id: 1, label: '关于我', link: '' },
-  { id: 2, label: '生活动态', link: '' },
-  { id: 3, label: '留言', link: '' },
+  { id: 1, label: '关于我', link: '/' },
+  { id: 2, label: '生活动态', link: '/moment' },
+  { id: 3, label: '留言', link: '/comment' },
 ];
 export default function Header() {
+  const [linkStyleId, setLinkStyleId] = useState(1);
+
+  const linkStyleHandle = (id: number) => {
+    setLinkStyleId(id);
+  };
   return (
-    <header className="flex justify-between items-center md:h-header">
-      <div className="text-center md:mr-20 logo">
-        <Link className="inline-block cursor-pointer text-current" href={'/'}>
+    <header className="md:flex md:justify-between  overflow-hidden md:items-center md:h-header py-5 md:py-0" >
+      <div className="text-center md:mr-20 ">
+        <Link className="inline-block cursor-pointer text-current logo" href={'/'} >
           <span className="leading-6 md:leading-7 tracking-wide inline-block px-3">
-            shkmzzh
+            shkmzzh 
           </span>
         </Link>
       </div>
 
-      <ul>
+      <ul className="flex justify-center items-center  gap-x-3 gap-y-2 mt-10 md:mt-0">
         {navList.map((item) => {
           return (
-            <li key={item.id}>
-              <Link href={item.link}>{item.label}</Link>
+            <li
+              key={item.id}
+              onClick={()=>linkStyleHandle(item.id)}
+              style={linkStyleId === item.id ? { textDecorationLine: 'none' } : {}}
+              className="whitespace-nowrap text-center  inline-block px-1 bg-white text-sm underline underline-offset-4"
+            >
+              <Link className="whitespace-nowrap" href={item.link}>
+                {item.label}
+              </Link>
             </li>
           );
         })}

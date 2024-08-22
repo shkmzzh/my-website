@@ -11,6 +11,7 @@ const config: Config = {
       height: {
         'header': 'var(--header-height)', 
       },
+    
     },
   },
   plugins: [],

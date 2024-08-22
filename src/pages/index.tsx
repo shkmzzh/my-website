@@ -1,15 +1,55 @@
-import Container from '@/components/container';
-import Header from '@/components/header';
-const styleObjrct = {
-  color:'red'
-}
+import React, { useState, useEffect } from 'react';
+import Layout from '@/components/layout';
+import { ReactElement } from 'react';
+
+import Card from '@/components/card'
+
+const styleObject = {
+  color: 'red',
+};
+
 export default function Home() {
+  const [isHighlighted, setIsHighlighted] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === 'm') {
+        setIsHighlighted(true);
+        setClickCount((prevCount) => prevCount + 1);
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === 'm') {
+        setIsHighlighted(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   return (
-    <Container>
-      <Header></Header>
-      <div className={`flex`}>
-        <span className="bg-white" style={styleObjrct}>hellow word</span>
+    <div>
+      <Card>
+      <div
+        style={styleObject}
+      >
+        <span>hello world</span>
       </div>
-    </Container>
+    
+      </Card>
+     
+    </div>
   );
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
