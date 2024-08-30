@@ -43,17 +43,6 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-@media (min-width: 768px) {
-  .md\:h-header {
-    height: var(--header-height);
-  }
-}
-@media (min-width: 768px) {
-  .md\:py-header {
-    padding-top: var(--header-height);
-    padding-bottom: var(--header-height);
-  }
-}
 
 /* header */
 

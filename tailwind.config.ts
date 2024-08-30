@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      height: {
+      spacing: {
         'header': 'var(--header-height)', 
       },
     

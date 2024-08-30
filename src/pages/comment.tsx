@@ -5,7 +5,7 @@ import Giscus from '@giscus/react';
 
 export default function Comment() {
   return (
-    <main className='py-5 md:py-header"'>
+    <main className='py-10 md:py-20'>
       <Card>
         <article className="p-4 md:p-6">
           <header className="mb-10 ">
