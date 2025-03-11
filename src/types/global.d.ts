@@ -1,5 +1,7 @@
+interface CSSPaintWorklet {
+  addModule(moduleURL: string): void;
+}
+
 interface CSS {
-  paintWorklet: {
-    addModule(module: string): void;
-  };
+  paintWorklet?: CSSPaintWorklet;
 }

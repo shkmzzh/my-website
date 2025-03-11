@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 };
 
 if (typeof window !== 'undefined' && 'paintWorklet' in CSS) {
-  CSS.paintWorklet.addModule('/utils/squircle.min.js');
+  (CSS as any).paintWorklet.addModule('/utils/squircle.min.js');
 }
 
 export default MyApp;
