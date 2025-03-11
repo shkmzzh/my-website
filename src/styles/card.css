@@ -21,7 +21,6 @@
 
 
 .Card-caption,.Card-border {
-    /* height:100%; */
     /* -webkit-mask-image:paint(squircle); */
     mask-image: paint(squircle);
 }
