@@ -21,7 +21,6 @@
 
 
 .Card-caption,.Card-border {
-    /* -webkit-mask-image:paint(squircle); */
     mask-image: paint(squircle);
 }
 
