@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 安装依赖
+      - name: Install dependencies
+        run: npm install
+
+      # 构建 Next.js 应用并导出为静态文件
+      - name: Build and Export
+        run: npm run build
+
+      # 创建 .nojekyll 文件以避免 GitHub Pages 对下划线文件夹做特殊处理
+      - name: Create .nojekyll file
+        run: touch out/.nojekyll
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
