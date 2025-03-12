@@ -21,9 +21,11 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      # 安装 pnpm
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # 启用 corepack 并安装 pnpm
+      - name: Enable Corepack and Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
 
       # 安装依赖
       - name: Install dependencies
