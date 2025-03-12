@@ -18,7 +18,6 @@ const nextConfig = {
   assetPrefix,
   basePath,
   reactStrictMode: true,
-  output:'export',
   images: {
     unoptimized: true,
   },
