@@ -21,19 +21,13 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      # 启用 corepack 并安装 pnpm
-      - name: Enable Corepack and Install pnpm
+      # 安装依赖并构建应用（在同一 step 内启用并激活 pnpm）
+      - name: Install dependencies and build
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
-
-      # 安装依赖
-      - name: Install dependencies
-        run: pnpm install
-
-      # 构建 Next.js 应用并导出为静态文件
-      - name: Build and Export
-        run: pnpm build
+          pnpm install
+          pnpm build
 
       # 创建 .nojekyll 文件以避免 GitHub Pages 对下划线文件夹做特殊处理
       - name: Create .nojekyll file
