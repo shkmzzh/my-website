@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'  # 缓存 pnpm 依赖，加速构建
+          cache: 'pnpm'
 
       # 安装 pnpm
       - name: Install pnpm
