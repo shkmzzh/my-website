@@ -1,33 +1,45 @@
-name: Actions CI
+name: CI
+
 on:
   push:
-    branches: [ main ]
-# 执行的一项或多项任务
+    branches: [ "main" ]
+  workflow_dispatch:
+
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: 获取源码  🛎️
-      uses: actions/checkout@v3
-    - name: Node环境版本 🗜️
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.20.1
-    - name: 安装 Pnpm 🧬
-      uses: pnpm/action-setup@v2
-      id: pnpm-install
-      with:
-          version: 7
-          run_install: true
-    - name: 安装依赖 ⚙️
-      run: pnpm install
-    - name: 打包 🏗️
-      run: |
-        npm run build
-        touch out/.nojekyll
-    - name: 部署 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: out
-        clean: true
+      # 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.20.1
+
+      # 启用 Corepack 并安装 pnpm
+      - name: Enable Corepack and install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+      # 安装依赖
+      - name: Install dependencies
+        run: pnpm install
+
+      # 构建 Next.js 应用并导出为静态文件
+      - name: Build and Export
+        run: pnpm build
+
+      # 创建 .nojekyll 文件以避免 GitHub Pages 对下划线文件夹做特殊处理
+      - name: Create .nojekyll file
+        run: touch out/.nojekyll
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
