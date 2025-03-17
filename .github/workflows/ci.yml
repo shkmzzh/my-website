@@ -1,45 +1,80 @@
-name: CI
+# Sample workflow for building and deploying a Next.js site to GitHub Pages
+#
+# To get started with Next.js see: https://nextjs.org/docs/getting-started
+#
+name: Deploy Next.js site to Pages
 
 on:
+  # Runs on pushes targeting the default branch 从默认分支拉取代码
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab 允许从"操作"选项卡手动运行此工作流
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages 设置 GitHub UB_TOKEN 的权限以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued. 仅允许一个并发部署，跳过在正在运行和最新排队之间排队的任务。
+
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete. 但是，不要取消正在进行的任务，因为我们希望允许这些生产部署完成。
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+ 
 jobs:
+  # Build job 部署任务
   build:
     runs-on: ubuntu-latest
-
     steps:
-      # 检出代码
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # 设置 Node.js 环境
-      - name: Setup Node.js
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 设置 Node 和指定版本
+      - name: Set Up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18.20.1
-
-      # 启用 Corepack 并安装 pnpm
-      - name: Enable Corepack and install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        with:
+          # Automatically inject basePath in your Next.js configuration file and disable 在 Next.js 配置文件中自动注入 basePath 并禁用
+          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized). 服务器端镜像优化
+          #
+          # You may remove this line if you want to manage the configuration yourself. 如果您想自己管理配置，可以删除此行。
+          static_site_generator: next
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            .next/cache
+          # Generate a new cache whenever packages or source files change. 当包或源文件发生更改时生成新的缓存。
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache. 如果源文件发生了变化但包没有变化，则从先前的缓存中重建。
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       # 安装依赖
       - name: Install dependencies
-        run: pnpm install
-
-      # 构建 Next.js 应用并导出为静态文件
-      - name: Build and Export
-        run: pnpm build
-
-      # 创建 .nojekyll 文件以避免 GitHub Pages 对下划线文件夹做特殊处理
-      - name: Create .nojekyll file
-        run: touch out/.nojekyll
-
-      # 部署到 GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        run: npm i
+      # 编译
+      - name: Build with Next.js
+        run: npm run build
+      # 上传工作 Build 完的静态文件会存放在 out 文件夹，在 next.config.js 中配置 output: 'export'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          path: ./out
+
+  # Deployment job 部署工作
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
