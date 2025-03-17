@@ -4,4 +4,4 @@ const nextConfig = {
   // 如果部署在子路径下，也可配置 basePath 和 assetPrefix
 };
 
-module.exports = nextConfig;
+export default nextConfig
