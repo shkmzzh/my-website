@@ -9,39 +9,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出代码
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 配置 Node.js 环境，指定版本为 18.20.1
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18.20.1'
 
-      # 安装 pnpm（可指定版本）
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8    # 根据需要可以指定 pnpm 版本
+          version: 8
           run_install: true
 
-      # 安装项目依赖
       - name: Install dependencies
         run: pnpm install
 
-      # 构建项目（确保在 package.json 中有对应的 build 脚本）
       - name: Build project
         run: pnpm run build
 
-      # 如果项目采用 Next.js 的静态导出，则执行导出命令
-      - name: Export static files
-        run: pnpm run export
-
-      # 部署到 GitHub Pages（部署静态站点时）
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages    # 目标部署分支
-          folder: out         # 输出目录（若使用 next export，默认生成在 out 目录）
+          branch: gh-pages       # 目标部署分支
+          folder: out            # Next.js 构建后生成静态文件目录
           clean: true
