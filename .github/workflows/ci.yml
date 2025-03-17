@@ -28,6 +28,7 @@ jobs:
 
       - name: Build project
         run: pnpm run build
+        touch out/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
