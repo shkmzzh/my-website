@@ -3,8 +3,9 @@ import '../styles/tailwind.css'
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
-
-
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
+const basePath = publicRuntimeConfig?.basePath || '';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -26,7 +27,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 };
 
 if (typeof window !== 'undefined' && 'paintWorklet' in CSS) {
-  (CSS as any).paintWorklet.addModule('/utils/squircle.min.js');
+  (CSS as any).paintWorklet.addModule('../utils/squircle.min.js');
 }
 
 export default MyApp;
