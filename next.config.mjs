@@ -13,13 +13,8 @@ if (isGithubActions && process.env.GITHUB_REPOSITORY) {
 
 const nextConfig = {
   output: 'export', // 开启静态导出功能
-  basePath,
-  assetPrefix,
   reactStrictMode: true,
   // 如果有需要，还可以配置 images.unoptimized 为 true
-  images: {
-    unoptimized: true
-  },
   compress:true,
 };
 
