@@ -8,7 +8,7 @@ if (isGithubActions && process.env.GITHUB_REPOSITORY) {
   // 从 "owner/repo" 中取出 repo 名称
   const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
   basePath = `/${repo}`;
-  assetPrefix = `/${repo}/`;
+  assetPrefix = `/my-website/`;
 }
 
 const nextConfig = {
