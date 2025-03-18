@@ -3,7 +3,7 @@ import Header from '@/components/header';
 
 export default function Container({ children }: { children?: ReactNode }) {
   return (
-    <section className="max-w-content min-w-content min-h-screen mx-auto">
+    <section className="max-w-content min-w-content min-h-screen mx-auto px-3">
       <Header></Header>
       {children}
     </section>
