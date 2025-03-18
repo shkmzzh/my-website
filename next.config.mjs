@@ -1,21 +1,25 @@
 /** @type {import('next').NextConfig} */
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 
-let assetPrefix = ``
-let basePath = ``
-const isGithubActions = process.env.GITHUB_ACTIONS || false;
-if (isGithubActions) {
-  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '');
-  assetPrefix = `/${repo}/`;
+let basePath = '';
+let assetPrefix = '';
+
+if (isGithubActions && process.env.GITHUB_REPOSITORY) {
+  const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
   basePath = `/${repo}`;
+  assetPrefix = `/${repo}/`;
 }
 
 const nextConfig = {
   output: 'export',
-  assetPrefix,
-  basePath,
   reactStrictMode: true,
+  basePath,
+  assetPrefix,
   images: {
     unoptimized: true,
+  },
+  publicRuntimeConfig: {
+    basePath,
   },
 };
 
