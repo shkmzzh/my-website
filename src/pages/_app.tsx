@@ -5,7 +5,7 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
-const basePath = publicRuntimeConfig?.basePath || '';
+// const basePath = publicRuntimeConfig?.basePath || '';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
