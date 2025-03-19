@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Header from '@/components/header';
+import Header from '@/components/Header';
 
 export default function Container({ children }: { children?: ReactNode }) {
   return (

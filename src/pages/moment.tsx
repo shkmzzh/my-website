@@ -1,4 +1,4 @@
-import Layout from '@/components/layout';
+import Layout from '@/components/Layout';
 import { ReactElement } from 'react';
 
 export default function Moment() {

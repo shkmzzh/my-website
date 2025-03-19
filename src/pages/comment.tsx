@@ -1,6 +1,6 @@
-import Layout from '@/components/layout';
+import Layout from '@/components/Layout';
 import { ReactElement } from 'react';
-import Card from '@/components/card';
+import Card from '@/components/Card';
 import Giscus from '@giscus/react';
 
 export default function Comment() {
