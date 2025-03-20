@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navList = [
   { id: 1, label: '关于我', link: '/' },
@@ -46,6 +47,7 @@ export default function Header() {
           );
         })}
       </ul>
+      <ThemeToggle></ThemeToggle>
     </header>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import { ReactElement } from 'react';
-import ThemeToggle from "@/components/ThemeToggle";
+
 
 import Card from '@/components/Card'
 
@@ -43,7 +43,7 @@ export default function Home() {
         style={styleObject}
       >
         <span>hello world</span>
-        <ThemeToggle></ThemeToggle>
+      
       </div>
     
       </Card>
